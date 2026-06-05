@@ -1,10 +1,10 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
-function ApplyCounterChange(component, current, applied)
+function ApplyCounterChange(component, current, data)
     return (current or 0) + 1
 end
 
-function PurgeCounterChange(component, current, applied)
+function PurgeCounterChange(component, current, data)
     return (current or 0) - 1
 end
 
