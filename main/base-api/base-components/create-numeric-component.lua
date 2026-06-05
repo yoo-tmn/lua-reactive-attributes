@@ -1,11 +1,11 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
-function ApplyNumericChange(component, container, data)
-    container[component] = (container[component] or 0) + data
+function ApplyNumericChange(component, current, applied)
+    return (current or 0) + applied
 end
 
-function PurgeNumericChange(component, container, data)
-    container[component] = (container[component] or 0) - data
+function PurgeNumericChange(component, current, applied)
+    return (current or 0) - applied
 end
 
 --- @class NumericComponent: Component

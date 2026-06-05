@@ -1,22 +1,24 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
---- @param container Container
+--- @param current number
+--- @param applied number
 --- @param component ProductComponent
-function ApplyProductChange(component, container, data)
+function ApplyProductChange(component, current, applied)
     if component.is_reduction then
-        container[component] = (container[component] or 1) * (1 - data)
+        return (current or 1) * (1 - applied)
     else
-        container[component] = (container[component] or 1) * data
+        return (current or 1) * applied
     end
 end
 
---- @param container Container
+--- @param current number
+--- @param applied number
 --- @param component ProductComponent
-function PurgeProductChange(component, container, data)
+function PurgeProductChange(component, current, applied)
     if component.is_reduction then
-        container[component] = (container[component] or 1) / (1 - data)
+        return (current or 1) / (1 - applied)
     else
-        container[component] = (container[component] or 1) / data
+        return (current or 1) / applied
     end
 end
 

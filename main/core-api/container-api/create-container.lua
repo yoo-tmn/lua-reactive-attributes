@@ -1,9 +1,10 @@
 local AttachListener = require('main.core-api.listener-api.attach-listener')
 local DetachListener = require('main.core-api.listener-api.detach-listener')
-local NotifyContainer = require('main.core-api.container-api.notify-container')
+local NotifyListeners = require('main.core-api.listener-api.notify-listeners')
 local UpdateContainer = require('main.core-api.container-api.update-container')
 
 --- @class Container
+--- @field set fun(self: Container, attribute: Attribute, value: any)
 --- @field update fun(self: Container)
 --- @field attach_listener fun(self: Container, listener: Listener)
 --- @field detach_listener fun(self: Container, listener: Listener)
@@ -18,22 +19,36 @@ local ContainerMT = {
 
     detach_listener = DetachListener,
 
-    apply_change = function(self, component, data, update)
-        component:apply_change(self, data)
-        NotifyContainer(self, component)
+    set = function(self, attribute, value)
+        self[attribute] = value
 
-        if update or update == nil then
-            self:update()
+        local bound_evaluators = attribute.bound_evaluators
+        if type(bound_evaluators) ~= 'table' then
+            return
         end
+
+        local evaluator
+        local queue = self.queue
+        for n = 1, #bound_evaluators do
+            evaluator = bound_evaluators[n]
+            if not queue[evaluator] then
+                queue.tail = queue.tail + 1
+                queue[evaluator] = true
+                queue[queue.tail] = evaluator
+            end
+        end
+
+        NotifyListeners(self, attribute)
+    end,
+
+    apply_change = function(self, component, data, update)
+        self:set(component, component:apply_change(self[component], data))
+        if update or update == nil then self:update() end
     end,
 
     purge_change = function(self, component, data, update)
-        component:purge_change(self, data)
-        NotifyContainer(self, component)
-
-        if update or update == nil then
-            self:update()
-        end
+        self:set(component, component:purge_change(self[component], data))
+        if update or update == nil then self:update() end
     end,
 }
 ContainerMT.__index = ContainerMT

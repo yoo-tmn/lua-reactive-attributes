@@ -1,23 +1,22 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
-function ApplyStorageChange(component, container, data)
-    local storage = container[component]
-    if type(storage) ~= 'table' then
-        container[component] = { data }
+function ApplyStorageChange(component, current, applied)
+    if type(current) ~= 'table' then
+        return { applied }
     else
-        storage[#storage + 1] = data
+        current[#current + 1] = applied
+        return current
     end
 end
 
-function PurgeStorageChange(component, container, data)
-    local storage = container[component]
-    if type(storage) ~= 'table' then
-        return
+function PurgeStorageChange(component, current, applied)
+    if type(current) ~= 'table' then
+        return nil
     end
-    for n = 1, #storage do
-        if storage[n] == data then
-            table.remove(storage, n)
-            break
+    for n = 1, #current do
+        if current[n] == applied then
+            table.remove(current, n)
+            return current
         end
     end
 end

@@ -1,5 +1,3 @@
-local NotifyContainer = require('main.core-api.container-api.notify-container')
-
 function UpdateContainer(container)
     local queue = container.queue
 
@@ -17,8 +15,7 @@ function UpdateContainer(container)
 
         value = evaluator:evaluate(container)
         if value ~= container[evaluator] then
-            container[evaluator] = value
-            NotifyContainer(container, evaluator)
+            container:set(evaluator, value)
         end
     end
 

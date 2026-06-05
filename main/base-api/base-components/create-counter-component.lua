@@ -1,11 +1,11 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
-function ApplyCounterChange(component, container)
-    container[component] = (container[component] or 0) + 1
+function ApplyCounterChange(component, current, applied)
+    return (current or 0) + 1
 end
 
-function PurgeCounterChange(component, container)
-    container[component] = (container[component] or 0) - 1
+function PurgeCounterChange(component, current, applied)
+    return (current or 0) - 1
 end
 
 --- @class CounterComponent: Component
