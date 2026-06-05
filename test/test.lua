@@ -1,0 +1,15 @@
+package.path = package.path .. ";./?.lua;./?/init.lua"
+
+print("\nSTART UNIT TESTS\n")
+require('test.base-components.counter-component')
+require('test.base-components.numeric-component')
+require('test.base-components.storage-component')
+require('test.base-components.product-component')
+print()
+require('test.base-evaluators.overrider-evaluator')
+require('test.base-evaluators.condition-evaluator')
+require('test.base-evaluators.parameter-evaluator')
+require('test.base-evaluators.reduction-evaluator')
+print()
+-- require('test.reactions.reactions')
+print()
