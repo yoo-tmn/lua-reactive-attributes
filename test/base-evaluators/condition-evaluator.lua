@@ -5,42 +5,40 @@ local StunCondition = ReactiveAttributes.CreateCondition()
 
 local container = ReactiveAttributes.CreateContainer()
 local compare = function(key, expected_value)
-    Test.Check(container[key] == expected_value)
+    Test.Compare(container[key], expected_value)
 end
-
-
 
 Test.Start('Condition Evaluator')
 
--- step #1
+-- test #1
 container:apply_change(StunCondition.normal)
 compare(StunCondition, true)
 
--- step #2
+-- test #2
 container:apply_change(StunCondition.immune)
 compare(StunCondition, false)
 
--- step #3
+-- test #3
 container:apply_change(StunCondition.normal)
 compare(StunCondition, false)
 
--- step #4
+-- test #4
 container:apply_change(StunCondition.strong)
 compare(StunCondition, true)
 
--- step #5
+-- test #5
 container:purge_change(StunCondition.strong)
 compare(StunCondition, false)
 
--- step #6
+-- test #6
 container:purge_change(StunCondition.immune)
 compare(StunCondition, true)
 
--- step #7
+-- test #7
 container:purge_change(StunCondition.normal)
 compare(StunCondition, true)
 
--- step #8
+-- test #8
 container:purge_change(StunCondition.normal)
 compare(StunCondition, false)
 

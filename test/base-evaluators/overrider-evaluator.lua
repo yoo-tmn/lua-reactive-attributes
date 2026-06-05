@@ -16,35 +16,37 @@ local Life300p9 = { value = 300, priority = 9 }
 
 local container = ReactiveAttributes.CreateContainer()
 local compare = function(key, expected_value)
-    Test.Check(container[key].value == expected_value)
+    if not container[key] then
+        Test.Compare(container[key])
+    else
+        Test.Compare(container[key].value, expected_value)
+    end
 end
-
-
 
 Test.Start('Overrider Evaluator')
 
--- step #1
+-- test #1
 container:apply_change(LifeOverrider.storage, Life100p5)
 compare(LifeOverrider, 100)
 
--- step #2
+-- test #2
 container:apply_change(LifeOverrider.storage, Life200p1)
 compare(LifeOverrider, 100)
 
--- step #3
+-- test #3
 container:apply_change(LifeOverrider.storage, Life300p9)
 compare(LifeOverrider, 300)
 
--- step #4
+-- test #4
 container:purge_change(LifeOverrider.storage, Life300p9)
 compare(LifeOverrider, 100)
 
--- step #5
+-- test #5
 container:purge_change(LifeOverrider.storage, Life100p5)
 compare(LifeOverrider, 200)
 
--- step #6
+-- test #6
 container:purge_change(LifeOverrider.storage, Life200p1)
-Test.Check(container[LifeOverrider] == nil)
+compare(LifeOverrider, nil)
 
 Test.Finish()

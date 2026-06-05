@@ -5,46 +5,47 @@ local LifeValue = ReactiveAttributes.CreateNumericComponent()
 local LifeRatio = ReactiveAttributes.CreateNumericComponent()
 
 local container = ReactiveAttributes.CreateContainer()
-local compare = function(key, expected_value, next_step)
-    Test.Check(container[key] == expected_value, next_step)
+local compare = function(key, expected_value)
+    Test.Compare(container[key], expected_value)
 end
-
-
 
 Test.Start('Numeric Component')
 
--- step #1
+-- test #1
 container:apply_change(LifeValue, 100)
 compare(LifeValue, 100)
 
--- step #2
+-- test #2
 container:apply_change(LifeValue, 200)
 compare(LifeValue, 300)
 
--- step #3
+-- test #3
 container:apply_change(LifeRatio, 10)
-compare(LifeValue, 300, false)
+compare(LifeValue, 300)
+-- test #4
 compare(LifeRatio, 10)
 
--- step #4
+-- test #5
 container:purge_change(LifeRatio, 10)
-compare(LifeValue, 300, false)
+compare(LifeValue, 300)
+-- test #6
 compare(LifeRatio, 0)
 
--- step #5
+-- test #7
 container:purge_change(LifeValue, 100)
-compare(LifeValue, 200, false)
+compare(LifeValue, 200)
+-- test #8
 compare(LifeRatio, 0)
 
--- step #6
+-- test #9
 container:apply_change(LifeValue, 200)
 compare(LifeValue, 400)
 
--- step #7
+-- test #10
 container:purge_change(LifeValue, 200)
 compare(LifeValue, 200)
 
--- step #8
+-- test #11
 container:purge_change(LifeValue, 200)
 compare(LifeValue, 0)
 

@@ -9,9 +9,15 @@ function EvaluateReduction(reduction, container)
     local basic_reduction = container[reduction.basic_reduction] or 0
     local diminishing_rating = container[reduction.diminishing_rating] or 0
     local diminishing_factor = container[reduction.diminishing_factor] or 0
-    diminishing_factor = diminishing_factor + reduction.base_diminishing_factor
 
-    return basic_reduction * (diminishing_rating / (diminishing_rating + diminishing_factor)) + final_reduction
+    local diminishing_reduction
+    if diminishing_rating == 0 or diminishing_rating == nil then
+        diminishing_reduction = 1
+    else
+        diminishing_reduction = diminishing_rating / (diminishing_rating + diminishing_factor + reduction.base_diminishing_factor)
+    end
+
+    return (1 - basic_reduction) * diminishing_reduction + final_reduction
 end
 
 --- @class Reduction: Evaluator
