@@ -32,6 +32,7 @@ local ContainerMT = {
 
     set = function(self, attribute, value)
         self[attribute] = value
+        NotifyListeners(self, attribute)
 
         local bound_evaluators = attribute.bound_evaluators
         if type(bound_evaluators) ~= 'table' then
@@ -55,8 +56,6 @@ local ContainerMT = {
 
             ::continue::
         end
-
-        NotifyListeners(self, attribute)
     end,
 
     apply_change = function(self, component, data, update)

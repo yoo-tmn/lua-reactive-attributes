@@ -12,6 +12,9 @@ local CreateOverrider = require('main.base-api.base-evaluators.create-overrider'
 local CreateParameter = require('main.base-api.base-evaluators.create-parameter')
 local CreateReduction = require('main.base-api.base-evaluators.create-reduction')
 
+local CreateConditionalModifier = require('main.base-api.reactive-modifiers.create-conditional-modifier')
+local CreateProgressiveModifier = require('main.base-api.reactive-modifiers.create-progressive-modifier')
+
 local ReactiveAttributes = {
     CreateComponent = CreateComponent,
     CreateEvaluator = CreateEvaluator,
@@ -26,6 +29,9 @@ local ReactiveAttributes = {
     CreateOverrider = CreateOverrider,
     CreateParameter = CreateParameter,
     CreateReduction = CreateReduction,
+
+    CreateConditionalModifier = CreateConditionalModifier,
+    CreateProgressiveModifier = CreateProgressiveModifier,
 }
 
 return ReactiveAttributes

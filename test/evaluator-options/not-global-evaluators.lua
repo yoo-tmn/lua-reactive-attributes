@@ -15,15 +15,19 @@ Test.Start('Not Global Evaluator')
 container:apply_change(Life, 100)
 Test.Compare(container[NGLifeEvaluator], nil)
 
+-- test #2
 container:append_evaluator(NGLifeEvaluator)
 Test.Compare(container[NGLifeEvaluator], 20)
 
+-- test #3
 container:apply_change(Life, 100)
 Test.Compare(container[NGLifeEvaluator], 40)
 
+-- test #4
 container:delete_evaluator(NGLifeEvaluator)
 Test.Compare(container[NGLifeEvaluator], nil)
 
+-- test #5
 container:purge_change(Life, 100)
 Test.Compare(container[NGLifeEvaluator], nil)
 

@@ -7,12 +7,13 @@ function Notify(container, attribute)
 
     listeners = container.listeners
     if type(listeners) ~= 'table' then
-        return
+        goto next
     end
     for n = 1, #listeners do
         listeners[n](container, attribute)
     end
 
+    ::next::
     listeners = attribute.listeners
     if type(listeners) ~= 'table' then
         return
