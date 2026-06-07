@@ -27,10 +27,12 @@ end
 --- @field diminishing_rating NumericComponent
 --- @field diminishing_factor NumericComponent
 
+--- @param is_global boolean?
+--- @param is_urgent boolean?
 --- @param base_diminishing_factor integer?
 --- @return Reduction
-function CreateReduction(base_diminishing_factor)
-    local reduction = CreateEvaluator(EvaluateReduction)
+function CreateReduction(base_diminishing_factor, is_global, is_urgent)
+    local reduction = CreateEvaluator(EvaluateReduction, is_global, is_urgent)
 --- @cast reduction Reduction
 
     reduction.base_diminishing_factor = base_diminishing_factor or 100

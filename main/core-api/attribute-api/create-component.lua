@@ -1,7 +1,7 @@
 local CreateAttribute = require('main.core-api.attribute-api.create-attribute')
 
---- @alias ApplyChangeFn fun(component: Component, container: Container, data: any)
---- @alias PurgeChangeFn fun(component: Component, container: Container, data: any)
+--- @alias ApplyChangeFn fun(component: Component, current: any, data: any)
+--- @alias PurgeChangeFn fun(component: Component, current: any, data: any)
 
 --- @class Component: Attribute
 --- @field apply_change ApplyChangeFn

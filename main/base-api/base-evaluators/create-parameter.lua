@@ -34,9 +34,11 @@ end
 --- @field ratio_overrider Overrider
 --- @field total_overrider Overrider
 
+--- @param is_global boolean?
+--- @param is_urgent boolean?
 --- @return Parameter
-function CreateParameter()
-    local parameter = CreateEvaluator(EvaluateParameter)
+function CreateParameter(is_global, is_urgent)
+    local parameter = CreateEvaluator(EvaluateParameter, is_global, is_urgent)
 --- @cast parameter Parameter
 
     local value = CreateNumericComponent()

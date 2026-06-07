@@ -2,6 +2,10 @@ local AttachListener = require('main.core-api.listener-api.attach-listener')
 local DetachListener = require('main.core-api.listener-api.detach-listener')
 local NotifyListeners = require('main.core-api.listener-api.notify-listeners')
 local UpdateContainer = require('main.core-api.container-api.update-container')
+local ContainerHasEvaluator = require('main.core-api.container-api.container-has-evaluator')
+local ContainerAppendEvaluator = require('main.core-api.container-api.container-append-evaluator')
+local ContainerDeleteEvaluator = require('main.core-api.container-api.container-delete-evaluator')
+
 
 --- @class Container
 --- @field set fun(self: Container, attribute: Attribute, value: any)
@@ -11,6 +15,9 @@ local UpdateContainer = require('main.core-api.container-api.update-container')
 --- @field apply_change fun(self: Container, component: Component, data: any, update: boolean?)
 --- @field purge_change fun(self: Container, component: Component, data: any, update: boolean?)
 --- @field listeners Listener[]?
+--- @field append_evaluator fun(self: Container, evaluator: Evaluator)
+--- @field delete_evaluator fun(self: Container, evaluator: Evaluator)
+--- @field evaluators { [Evaluator]: boolean }?
 
 local ContainerMT = {
     update = UpdateContainer,
@@ -18,6 +25,10 @@ local ContainerMT = {
     attach_listener = AttachListener,
 
     detach_listener = DetachListener,
+
+    append_evaluator = ContainerAppendEvaluator,
+
+    delete_evaluator = ContainerDeleteEvaluator,
 
     set = function(self, attribute, value)
         self[attribute] = value
@@ -31,11 +42,18 @@ local ContainerMT = {
         local queue = self.queue
         for n = 1, #bound_evaluators do
             evaluator = bound_evaluators[n]
+
+            if not ContainerHasEvaluator(self, evaluator) then
+                goto continue
+            end
+
             if not queue[evaluator] then
                 queue.tail = queue.tail + 1
                 queue[evaluator] = true
                 queue[queue.tail] = evaluator
             end
+
+            ::continue::
         end
 
         NotifyListeners(self, attribute)
