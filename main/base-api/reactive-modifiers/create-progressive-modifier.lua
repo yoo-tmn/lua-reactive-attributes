@@ -1,15 +1,12 @@
 --- @param attribute Attribute
 --- @param modifier_data { [Component]: number }
 function CreateProgressiveModifier(attribute, modifier_data)
-    local levels = { }
-    local condition_listener = function(container)
-        local level = container[attribute]
+    local condition_listener = function(container, _, level, prev_level)
+        level = level or 0
         if type(level) ~= 'number' then
             return
         end
-
-        local prev_level = levels[container] or 0
-        levels[container] = level
+        prev_level = prev_level or 0
         level = level - prev_level
 
         if level == 0 then

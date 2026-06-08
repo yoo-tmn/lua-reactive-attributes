@@ -1,28 +1,24 @@
 --- @param attribute Attribute
+--- @param modifier_data { [Component]: any }
 function CreateConditionalModifier(attribute, modifier_data)
-    local is_applied = { }
-    local condition_listener = function(container)
-        local applied = is_applied[container]
-
-        if container[attribute] then
-            if applied then
+    local condition_listener = function(container, _, need_apply, is_applied)
+        if need_apply then
+            if is_applied then
                 return
             else
                 for component, data in pairs(modifier_data) do
                     container:apply_change(component, data, false)
                 end
                 container:update()
-                is_applied[container] = true
             end
         else
-            if not applied then
+            if not is_applied then
                 return
             else
                 for component, data in pairs(modifier_data) do
                     container:purge_change(component, data, false)
                 end
                 container:update()
-                is_applied[container] = false
             end
         end
     end

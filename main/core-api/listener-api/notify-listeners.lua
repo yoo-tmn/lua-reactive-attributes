@@ -2,7 +2,7 @@
 
 --- @param container Container
 --- @param attribute Attribute
-function Notify(container, attribute)
+function Notify(container, attribute, data, prev)
     local listeners
 
     listeners = container.listeners
@@ -10,7 +10,7 @@ function Notify(container, attribute)
         goto next
     end
     for n = 1, #listeners do
-        listeners[n](container, attribute)
+        listeners[n](container, attribute, data, prev)
     end
 
     ::next::
@@ -19,7 +19,7 @@ function Notify(container, attribute)
         return
     end
     for n = 1, #listeners do
-        listeners[n](container, attribute)
+        listeners[n](container, attribute, data, prev)
     end
 end
 
