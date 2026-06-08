@@ -1,6 +1,6 @@
 --- @param container Container
 --- @param evaluator Evaluator
-function ContainerAppendEvaluator(container, evaluator)
+function ContainerAttachEvaluator(container, evaluator)
     local evaluators = container.evaluators
     if type(evaluators) ~= 'table' then
         evaluators = { }
@@ -10,4 +10,4 @@ function ContainerAppendEvaluator(container, evaluator)
     container:set(evaluator, evaluator:evaluate(container))
 end
 
-return ContainerAppendEvaluator
+return ContainerAttachEvaluator

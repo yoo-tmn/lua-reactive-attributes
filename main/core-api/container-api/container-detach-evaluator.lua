@@ -1,6 +1,6 @@
 --- @param container Container
 --- @param evaluator Evaluator
-function ContainerDeleteEvaluator(container, evaluator)
+function ContainerDetachEvaluator(container, evaluator)
     local evaluators = container.evaluators
     if type(evaluators) ~= 'table' then
         return
@@ -9,4 +9,4 @@ function ContainerDeleteEvaluator(container, evaluator)
     container:set(evaluator, nil)
 end
 
-return ContainerDeleteEvaluator
+return ContainerDetachEvaluator

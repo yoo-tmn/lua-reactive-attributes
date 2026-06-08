@@ -24,7 +24,7 @@ Test.Compare(container[Life], 300)
 -- test #2
 Test.Compare(container[Mana], 200)
 
-container:append_evaluator(MoreThan400Life)
+container:attach_evaluator(MoreThan400Life)
 -- test #3
 Test.Compare(container[Life], 300)
 -- test #4
