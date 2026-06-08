@@ -4,12 +4,12 @@ local ReactiveAttributes = require('reactive-attributes')
 local Life = ReactiveAttributes.CreateNumericComponent()
 local NGLifeEvaluator = ReactiveAttributes.CreateEvaluator(function(evaluator, container)
     return container[Life] / 5
-end, false, true)
+end, true)
 Life:bind_evaluator(NGLifeEvaluator)
 
 local container = ReactiveAttributes.CreateContainer()
 
-Test.Start('Not Global Evaluator')
+Test.Start('Local Evaluator')
 
 -- test #1
 container:apply_change(Life, 100)

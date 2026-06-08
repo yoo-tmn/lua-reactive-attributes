@@ -6,7 +6,7 @@ local Mana = ReactiveAttributes.CreateNumericComponent()
 
 local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(e, container)
     return (container[Life] or 0) > 400
-end, false)
+end, true)
 Life:bind_evaluator(MoreThan400Life)
 
 ReactiveAttributes.CreateConditionalModifier(MoreThan400Life, {
