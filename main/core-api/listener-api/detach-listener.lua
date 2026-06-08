@@ -1,4 +1,4 @@
---- @type fun(target: Attribute | Container, listener: Listener)
+--- @type fun(target: Reactive, listener: Listener)
 function DetachListener(target, listener)
     local listeners = target.listeners
     if type(listeners) ~= 'table' then

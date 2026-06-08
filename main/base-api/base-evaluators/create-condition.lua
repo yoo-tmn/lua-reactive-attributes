@@ -24,11 +24,10 @@ end
 --- @field immune CounterComponent
 --- @field strong CounterComponent
 
---- @param is_global boolean?
---- @param is_urgent boolean?
+--- @param is_local boolean?
 --- @return Condition
-function CreateCondition(is_global, is_urgent)
-    local condition = CreateEvaluator(EvaluateCondition, is_global, is_urgent)
+function CreateCondition(is_local)
+    local condition = CreateEvaluator(EvaluateCondition, is_local)
 --- @cast condition Condition
 
     local normal = CreateCounterComponent()

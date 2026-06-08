@@ -1,26 +1,27 @@
---- @alias Listener fun(container: Container, attribute: Attribute)
+--- @class Reactive
+--- @field listeners Listener[]?
+--- @field attach_listener fun(self, listener: Listener)
+--- @field detach_listener fun(self, listener: Listener)
+
+--- @alias Listener fun(container: Container, attribute: Attribute, data: any, prev: any)
 
 --- @param container Container
 --- @param attribute Attribute
-function Notify(container, attribute, data, prev)
+function NotifyListeners(container, attribute, data, prev)
     local listeners
 
     listeners = container.listeners
-    if type(listeners) ~= 'table' then
-        goto next
+    if type(listeners) == 'table' then    
+        for n = 1, #listeners do
+            listeners[n](container, attribute, data, prev)
+        end
     end
-    for n = 1, #listeners do
-        listeners[n](container, attribute, data, prev)
-    end
-
-    ::next::
     listeners = attribute.listeners
-    if type(listeners) ~= 'table' then
-        return
-    end
-    for n = 1, #listeners do
-        listeners[n](container, attribute, data, prev)
+    if type(listeners) == 'table' then
+        for n = 1, #listeners do
+            listeners[n](container, attribute, data, prev)
+        end
     end
 end
 
-return Notify
+return NotifyListeners

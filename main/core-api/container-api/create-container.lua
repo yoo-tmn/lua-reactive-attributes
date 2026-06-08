@@ -8,14 +8,11 @@ local ContainerAttachEvaluator = require('main.core-api.container-api.container-
 local ContainerDetachEvaluator = require('main.core-api.container-api.container-detach-evaluator')
 
 
---- @class Container
+--- @class Container: Reactive
 --- @field set fun(self: Container, attribute: Attribute, value: any)
 --- @field update fun(self: Container)
---- @field attach_listener fun(self: Container, listener: Listener)
---- @field detach_listener fun(self: Container, listener: Listener)
 --- @field apply_change fun(self: Container, component: Component, data: any, update: boolean?)
 --- @field purge_change fun(self: Container, component: Component, data: any, update: boolean?)
---- @field listeners Listener[]?
 --- @field has_evaluator fun(self: Container, evaluator: Evaluator): boolean
 --- @field attach_evaluator fun(self: Container, evaluator: Evaluator)
 --- @field detach_evaluator fun(self: Container, evaluator: Evaluator)

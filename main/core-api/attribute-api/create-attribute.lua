@@ -1,11 +1,8 @@
 local AttachListener = require('main.core-api.listener-api.attach-listener')
 local DetachListener = require('main.core-api.listener-api.detach-listener')
 
---- @class Attribute
+--- @class Attribute: Reactive
 --- @field bind_evaluator  fun(self: Attribute, evaluator: Evaluator)
---- @field attach_listener fun(self: Attribute, listener: Listener)
---- @field detach_listener fun(self: Attribute, listener: Listener)
---- @field listeners Listener[]?
 
 local AttributeMT = {
     attach_listener = AttachListener,

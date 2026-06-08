@@ -28,12 +28,11 @@ end
 --- @field storage StorageComponent
 --- @field compare (fun(prev: table, next: table): boolean)?
 
---- @param is_global boolean?
---- @param is_urgent boolean?
+--- @param is_local boolean?
 --- @param compare (fun(prev: table, next: table): boolean)?
 --- @return Overrider
-function CreateOverrider(compare, is_global, is_urgent)
-    local overrider = CreateEvaluator(EvaluateOverrider, is_global, is_urgent)
+function CreateOverrider(compare, is_local)
+    local overrider = CreateEvaluator(EvaluateOverrider, is_local)
 --- @cast overrider Overrider
 
     local storage = CreateStorageComponent()
