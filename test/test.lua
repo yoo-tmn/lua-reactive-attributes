@@ -1,18 +1,35 @@
 package.path = package.path .. ";./?.lua;./?/init.lua"
 
+local TestCounterComponent = require('test.base-components.counter-component')
+local TestNumericComponent = require('test.base-components.numeric-component')
+local TestProductComponent = require('test.base-components.product-component')
+local TestStorageComponent = require('test.base-components.storage-component')
+local TestCondition = require('test.base-evaluators.condition-evaluator')
+local TestOverrider = require('test.base-evaluators.overrider-evaluator')
+local TestParameter = require('test.base-evaluators.parameter-evaluator')
+local TestReduction = require('test.base-evaluators.reduction-evaluator')
+local TestLocalEvaluator = require('test.local-evaluators.local-evaluator')
+local TestConditionalModifier = require('test.modifiers.conditional-modifiers')
+local TestProgressiveModifier = require('test.modifiers.progressive-modifiers')
+
 print("\nSTART UNIT TESTS\n")
-require('test.base-components.counter-component')
-require('test.base-components.numeric-component')
-require('test.base-components.product-component')
-require('test.base-components.storage-component')
+
+TestCounterComponent()
+TestNumericComponent()
+TestProductComponent()
+TestStorageComponent()
+
 print()
-require('test.base-evaluators.overrider-evaluator')
-require('test.base-evaluators.condition-evaluator')
-require('test.base-evaluators.parameter-evaluator')
-require('test.base-evaluators.reduction-evaluator')
+
+TestCondition()
+TestOverrider()
+TestParameter()
+TestReduction()
+
 print()
-require('test.local-evaluators.local-evaluator')
-print()
-require('test.modifiers.progressive-modifiers')
-require('test.modifiers.conditional-modifiers')
+
+TestLocalEvaluator()
+TestConditionalModifier()
+TestProgressiveModifier()
+
 print()

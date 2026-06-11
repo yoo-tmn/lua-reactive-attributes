@@ -4,7 +4,7 @@ local CreateAttribute = require('main.core-api.attribute-api.create-attribute')
 
 --- @class Evaluator: Attribute
 --- @field evaluate EvaluateFn
---- @field is_local boolean
+--- @field is_local boolean?
 
 --- @param evaluate EvaluateFn
 --- @param is_local boolean?

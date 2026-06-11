@@ -23,30 +23,34 @@ local compare = function(key, expected_value)
     end
 end
 
-Test.Start('Overrider Evaluator')
+function TestOverrider()
+    Test.Start('Overrider Evaluator')
 
--- test #1
-container:apply_change(LifeOverrider.storage, Life100p5)
-compare(LifeOverrider, 100)
+    -- test #1
+    container:apply_change(LifeOverrider.storage, Life100p5)
+    compare(LifeOverrider, 100)
 
--- test #2
-container:apply_change(LifeOverrider.storage, Life200p1)
-compare(LifeOverrider, 100)
+    -- test #2
+    container:apply_change(LifeOverrider.storage, Life200p1)
+    compare(LifeOverrider, 100)
 
--- test #3
-container:apply_change(LifeOverrider.storage, Life300p9)
-compare(LifeOverrider, 300)
+    -- test #3
+    container:apply_change(LifeOverrider.storage, Life300p9)
+    compare(LifeOverrider, 300)
 
--- test #4
-container:purge_change(LifeOverrider.storage, Life300p9)
-compare(LifeOverrider, 100)
+    -- test #4
+    container:purge_change(LifeOverrider.storage, Life300p9)
+    compare(LifeOverrider, 100)
 
--- test #5
-container:purge_change(LifeOverrider.storage, Life100p5)
-compare(LifeOverrider, 200)
+    -- test #5
+    container:purge_change(LifeOverrider.storage, Life100p5)
+    compare(LifeOverrider, 200)
 
--- test #6
-container:purge_change(LifeOverrider.storage, Life200p1)
-compare(LifeOverrider, nil)
+    -- test #6
+    container:purge_change(LifeOverrider.storage, Life200p1)
+    compare(LifeOverrider, nil)
 
-Test.Finish()
+    Test.Finish()
+end
+
+return TestOverrider
