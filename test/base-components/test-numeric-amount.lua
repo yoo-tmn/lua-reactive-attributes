@@ -1,16 +1,16 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local LifeValue = ReactiveAttributes.CreateNumericComponent()
-local LifeRatio = ReactiveAttributes.CreateNumericComponent()
+local LifeValue = ReactiveAttributes.CreateAmountComponent()
+local LifeRatio = ReactiveAttributes.CreateAmountComponent()
 
 local container = ReactiveAttributes.CreateContainer()
 local compare = function(key, expected_value)
     Test.Compare(container[key], expected_value)
 end
 
-function TestNumericComponent()
-    Test.Start('Numeric Component')
+function TestNumericAmount()
+    Test.Start('Amount Component')
 
     -- test #1
     container:apply_change(LifeValue, 100)
@@ -53,4 +53,4 @@ function TestNumericComponent()
     Test.Finish()
 end
 
-return TestNumericComponent
+return TestNumericAmount

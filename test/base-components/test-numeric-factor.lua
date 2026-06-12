@@ -1,15 +1,15 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local DamageReduction = ReactiveAttributes.CreateProductComponent()
+local DamageReduction = ReactiveAttributes.CreateFactorComponent()
 
 local container = ReactiveAttributes.CreateContainer()
 local compare = function(key, expected_value)
     Test.Compare(container[key], expected_value, true)
 end
 
-function TestProductComponent()
-    Test.Start('Product Component')
+function TestNumericFactor()
+    Test.Start('Factor Component')
 
     -- test #1
     container:apply_change(DamageReduction, 0.8)
@@ -46,4 +46,4 @@ function TestProductComponent()
     Test.Finish()
 end
 
-return TestProductComponent
+return TestNumericFactor

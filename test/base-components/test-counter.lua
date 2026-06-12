@@ -9,7 +9,7 @@ local compare = function(key, expected_value)
     Test.Compare(container[key], expected_value)
 end
 
-function TestCounterComponent()
+function TestCounter()
     Test.Start('Counter Component')
 
     -- test #1
@@ -59,4 +59,4 @@ function TestCounterComponent()
     Test.Finish()
 end
 
-return TestCounterComponent
+return TestCounter

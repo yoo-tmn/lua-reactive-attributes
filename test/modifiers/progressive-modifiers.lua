@@ -1,9 +1,9 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local PassiveSkillLevel = ReactiveAttributes.CreateNumericComponent()
-local Life = ReactiveAttributes.CreateNumericComponent()
-local Mana = ReactiveAttributes.CreateNumericComponent()
+local PassiveSkillLevel = ReactiveAttributes.CreateAmountComponent()
+local Life = ReactiveAttributes.CreateAmountComponent()
+local Mana = ReactiveAttributes.CreateAmountComponent()
 
 ReactiveAttributes.CreateProgressiveModifier(PassiveSkillLevel, {
     [Life] = 40,

@@ -1,14 +1,14 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
-function ApplyCounterChange(component, current, data)
-    return (current or 0) + 1
-end
-
-function PurgeCounterChange(component, current, data)
-    return (current or 0) - 1
-end
-
 --- @class CounterComponent: Component
+
+function ApplyCounterChange(_, prev, _)
+    return (prev or 0) + 1
+end
+
+function PurgeCounterChange(_, prev, _)
+    return (prev or 0) - 1
+end
 
 --- @return CounterComponent
 function CreateCounterComponent()

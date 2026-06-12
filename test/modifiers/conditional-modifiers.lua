@@ -1,8 +1,8 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local Life = ReactiveAttributes.CreateNumericComponent()
-local Mana = ReactiveAttributes.CreateNumericComponent()
+local Life = ReactiveAttributes.CreateAmountComponent()
+local Mana = ReactiveAttributes.CreateAmountComponent()
 
 local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(e, container)
     return (container[Life] or 0) > 400

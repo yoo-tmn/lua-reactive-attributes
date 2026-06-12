@@ -1,7 +1,7 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local DamageReduction = ReactiveAttributes.CreateReduction()
+local DamageReduction = ReactiveAttributes.CreateReductionEvaluator()
 
 local container = ReactiveAttributes.CreateContainer()
 local compare = function(key, expected_value)
@@ -24,31 +24,31 @@ function TestReduction()
     compare(DamageReduction, 25/125)
 
     -- test #4
-    container:apply_change(DamageReduction.final_reduction, 0.05)
+    container:apply_change(DamageReduction.flat_reduction, 0.05)
     compare(DamageReduction, 25/125 + 0.05)
 
     -- test #5
-    container:apply_change(DamageReduction.basic_reduction, 0.20)
+    container:apply_change(DamageReduction.base_reduction, 0.20)
     compare(DamageReduction, 0.200 * 25/125 + 0.05)
 
     -- test #6
-    container:apply_change(DamageReduction.basic_reduction, 0.20)
+    container:apply_change(DamageReduction.base_reduction, 0.20)
     compare(DamageReduction, 0.360 * 25/125 + 0.05)
 
     -- test #7
-    container:apply_change(DamageReduction.basic_reduction, 0.30)
+    container:apply_change(DamageReduction.base_reduction, 0.30)
     compare(DamageReduction, 0.552 * 25/125 + 0.05)
 
     -- test #8
-    container:purge_change(DamageReduction.basic_reduction, 0.20)
+    container:purge_change(DamageReduction.base_reduction, 0.20)
     compare(DamageReduction, 0.440 * 25/125 + 0.05)
 
     -- test #9
-    container:purge_change(DamageReduction.basic_reduction, 0.20)
+    container:purge_change(DamageReduction.base_reduction, 0.20)
     compare(DamageReduction, 0.300 * 25/125 + 0.05)
 
     -- test #10
-    container:purge_change(DamageReduction.final_reduction, 0.05)
+    container:purge_change(DamageReduction.flat_reduction, 0.05)
     compare(DamageReduction, 0.300 * 25/125)
 
     -- test #11
@@ -56,7 +56,7 @@ function TestReduction()
     compare(DamageReduction, 0.300)
 
     -- test #12
-    container:purge_change(DamageReduction.basic_reduction, 0.30)
+    container:purge_change(DamageReduction.base_reduction, 0.30)
     compare(DamageReduction, 0)
 
     Test.Finish()
