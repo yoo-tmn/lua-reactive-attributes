@@ -8,7 +8,7 @@ local Life250p5 = { priority = 5, value = 250 }
 local container = ReactiveAttributes.CreateContainer()
 
 function TestParameter()
-    Test.Start('Parameter API')
+    Test.Start('Parameter Evaluator')
 
     -- test #1
     container:apply_change(LifeParameter.base_value, 100)

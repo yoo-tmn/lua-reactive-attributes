@@ -1,7 +1,7 @@
 package.path = package.path .. ";./?.lua;./?/init.lua"
 
 local TestCumulativeComponent = require('test.base-components.test-cumulative-component')
-local TestCollectionComponent = require('test.base-components.test-collection-collection')
+local TestCollectionComponent = require('test.base-components.test-collection-component')
 local TestComplementComponent = require('test.base-components.test-complement-component')
 local TestDiminishingComponent = require('test.base-components.test-diminishing-component')
 local TestMultiplyingComponent = require('test.base-components.test-multiplying-component')

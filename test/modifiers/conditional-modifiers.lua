@@ -16,7 +16,7 @@ ReactiveAttributes.CreateConditionalModifier(MoreThan400Life, {
 local container = ReactiveAttributes.CreateContainer()
 
 function TestConditionalModifier()
-    Test.Start('Progressive Modifier')
+    Test.Start('Conditional Modifier')
 
     container:apply_change(Life, 300)
     container:apply_change(Mana, 200)
