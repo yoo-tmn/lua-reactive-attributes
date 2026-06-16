@@ -1,10 +1,10 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local Life = ReactiveAttributes.CreateAmountComponent()
-local Mana = ReactiveAttributes.CreateAmountComponent()
+local Life = ReactiveAttributes.CreateCumulativeComponent()
+local Mana = ReactiveAttributes.CreateCumulativeComponent()
 
-local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(e, container)
+local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(_, container)
     return (container[Life] or 0) > 400
 end, true)
 Life:bind_evaluator(MoreThan400Life)

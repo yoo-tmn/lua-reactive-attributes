@@ -1,7 +1,7 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local Life = ReactiveAttributes.CreateAmountComponent()
+local Life = ReactiveAttributes.CreateCumulativeComponent()
 local NGLifeEvaluator = ReactiveAttributes.CreateEvaluator(function(_, container)
     return container[Life] / 5
 end, true)

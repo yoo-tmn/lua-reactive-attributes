@@ -1,17 +1,16 @@
 local CreateAttribute = require('main.core-api.attribute-api.create-attribute')
 
---- @alias EvaluateFn fun(evaluator: Evaluator, container: Container): boolean | number | integer | table | string | function
+--- @alias Evaluate fun(evaluator: Evaluator, container: Container): boolean | number | integer | table | string | function
 
 --- @class Evaluator: Attribute
---- @field evaluate EvaluateFn
+--- @field evaluate Evaluate
 --- @field is_local boolean?
 
---- @param evaluate EvaluateFn
+--- @param evaluate Evaluate
 --- @param is_local boolean?
 --- @return Evaluator
 function CreateEvaluator(evaluate, is_local)
-    local evaluator = CreateAttribute()
---- @cast evaluator Evaluator
+    local evaluator = CreateAttribute() --[[@as Evaluator]]
 
     evaluator.is_local = is_local
     evaluator.evaluate = evaluate

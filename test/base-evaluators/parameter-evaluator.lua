@@ -1,22 +1,21 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local LifeParameter = ReactiveAttributes.CreateParameterEvaluator()
+local LifeParameter = ReactiveAttributes.CreateParameter()
 
 local Life250p5 = { priority = 5, value = 250 }
-local Life250p1 = { priority = 1, value = 250 }
 
 local container = ReactiveAttributes.CreateContainer()
 
 function TestParameter()
-    Test.Start('Parameter Evaluator')
+    Test.Start('Parameter API')
 
     -- test #1
-    container:apply_change(LifeParameter.add_amount, 100)
+    container:apply_change(LifeParameter.base_value, 100)
     Test.Compare(container[LifeParameter], 100)
 
     -- test #2
-    container:apply_change(LifeParameter.add_amount, 200)
+    container:apply_change(LifeParameter.base_value, 200)
     Test.Compare(container[LifeParameter], 300)
 
     -- test #3
@@ -44,19 +43,19 @@ function TestParameter()
     Test.Compare(container[LifeParameter], 396, true)
 
     -- test #9
-    container:apply_change(LifeParameter.add_soft_overrider, Life250p5)
+    container:apply_change(LifeParameter.soft_overriders, Life250p5)
     Test.Compare(container[LifeParameter], 330)
 
     -- test #10
-    container:purge_change(LifeParameter.add_amount, 100)
+    container:purge_change(LifeParameter.base_value, 100)
     Test.Compare(container[LifeParameter], 330)
 
     -- test #11
-    container:purge_change(LifeParameter.add_soft_overrider, Life250p5)
+    container:purge_change(LifeParameter.soft_overriders, Life250p5)
     Test.Compare(container[LifeParameter], 264)
 
     -- test #12
-    container:apply_change(LifeParameter.add_hard_overrider, Life250p5)
+    container:apply_change(LifeParameter.hard_overriders, Life250p5)
     Test.Compare(container[LifeParameter], 250)
 
     Test.Finish()

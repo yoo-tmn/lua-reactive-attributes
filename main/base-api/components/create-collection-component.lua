@@ -1,9 +1,19 @@
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 
+--- Modifying: simply stores provided data in a list
+--- #### Example:
+--- ``` Lua
+--- local life_overrider = CreateCollectionComponent()
+--- container:apply(life_overrider, 100) -- apply 100   result: { 100 }
+--- container:apply(life_overrider, 200) -- apply 200   result: { 100, 200 }
+--- container:purge(life_overrider, 100) -- purge 100   result: { 200 }
+--- ```
+--- Actually does not create a list for first element.  
+--- Use methods `:get_head`, `:get_tail` and `:select(comparator)` for aggregation
 --- @class CollectionComponent: Component
 --- @field get_head fun(self: CollectionComponent, container: Container)
 --- @field get_tail fun(self: CollectionComponent, container: Container)
---- @field select fun(self: CollectionComponent, container: Container, compare: fun(prev, next): any)
+--- @field select fun(self: CollectionComponent, container: Container, comparator: fun(prev, next): any)
 
 local IS_COLLECTION = { }
 
@@ -43,7 +53,7 @@ function PurgeCollectionChange(_, prev, change)
     return prev
 end
 
-function CollectionSelect(collection, container, compare)
+function CollectionSelect(collection, container, comparator)
     local data = container[collection]
 
     if not IsCollection(data) then
@@ -52,7 +62,7 @@ function CollectionSelect(collection, container, compare)
 
     local result = data[1]
     for n = 2, #data do
-        result = compare(result, data[n])
+        result = comparator(result, data[n])
     end
     return result
 end
@@ -83,10 +93,20 @@ function CollectionGetTail(collection, container)
     return data[#data]
 end
 
+--- Modifying: simply stores provided data in a list
+--- #### Example:
+--- ``` Lua
+--- local life_overrider = CreateCollectionComponent()
+--- container:apply(life_overrider, 100) -- apply 100   result: { 100 }
+--- container:apply(life_overrider, 200) -- apply 200   result: { 100, 200 }
+--- container:purge(life_overrider, 100) -- purge 100   result: { 200 }
+--- ```
+--- Actually does not create a list for first element.  
+--- Use methods `:get_head`, `:get_tail` and `:select(comparator)` for aggregation
+--- @param evaluator Evaluator?
 --- @return CollectionComponent
-function CreateCollectionComponent()
-    local component = CreateComponent(ApplyCollectionChange, PurgeCollectionChange)
---- @cast component CollectionComponent
+function CreateCollectionComponent(evaluator)
+    local component = CreateComponent(ApplyCollectionChange, PurgeCollectionChange, evaluator) --[[@as CollectionComponent]]
     component.get_head = CollectionGetHead
     component.get_tail = CollectionGetTail
     component.select = CollectionSelect

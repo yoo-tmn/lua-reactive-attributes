@@ -5,7 +5,7 @@ local LifeOverrider = ReactiveAttributes.CreateCollectionComponent()
 
 local container = ReactiveAttributes.CreateContainer()
 
-function TestCollection()
+function TestCollectionComponent()
     Test.Start('Collection Component')
 
     -- test #1
@@ -62,4 +62,4 @@ function TestCollection()
     Test.Finish()
 end
 
-return TestCollection
+return TestCollectionComponent

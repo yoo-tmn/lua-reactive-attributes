@@ -1,30 +1,26 @@
 package.path = package.path .. ";./?.lua;./?/init.lua"
 
-local TestCounter = require('test.base-components.test-counter')
-local TestCollection = require('test.base-components.test-collection')
-local TestNumericAmount = require('test.base-components.test-numeric-amount')
-local TestNumericFactor = require('test.base-components.test-numeric-factor')
-local TestNumericReduction = require('test.base-components.test-numeric-reduction')
-local TestState = require('test.base-evaluators.state-evaluator')
-local TestOverrider = require('test.base-evaluators.overrider-evaluator')
+local TestCumulativeComponent = require('test.base-components.test-cumulative-component')
+local TestCollectionComponent = require('test.base-components.test-collection-collection')
+local TestComplementComponent = require('test.base-components.test-complement-component')
+local TestDiminishingComponent = require('test.base-components.test-diminishing-component')
+local TestMultiplyingComponent = require('test.base-components.test-multiplying-component')
 local TestParameter = require('test.base-evaluators.parameter-evaluator')
 local TestReduction = require('test.base-evaluators.reduction-evaluator')
-local TestLocalEvaluator = require('test.local-evaluators.local-evaluator')
+local TestLocalEvaluator = require('test.local-evaluator.local-evaluator')
 local TestConditionalModifier = require('test.modifiers.conditional-modifiers')
 local TestProgressiveModifier = require('test.modifiers.progressive-modifiers')
 
 print("\nSTART UNIT TESTS\n")
 
-TestCounter()
-TestCollection()
-TestNumericAmount()
-TestNumericFactor()
-TestNumericReduction()
+TestCumulativeComponent()
+TestCollectionComponent()
+TestComplementComponent()
+TestMultiplyingComponent()
+TestDiminishingComponent()
 
 print()
 
-TestState()
-TestOverrider()
 TestParameter()
 TestReduction()
 

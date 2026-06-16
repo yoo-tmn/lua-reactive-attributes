@@ -1,12 +1,12 @@
 local Test = require('test.unit-test')
 local ReactiveAttributes = require('reactive-attributes')
 
-local DamageReduction = ReactiveAttributes.CreateReductionComponent()
+local DamageReduction = ReactiveAttributes.CreateComplementComponent()
 
 local container = ReactiveAttributes.CreateContainer()
 
-function TestNumericReduction()
-    Test.Start('Reduction Component')
+function TestComplementComponent()
+    Test.Start('Complement Component')
 
     -- test #1
     container:apply_change(DamageReduction, 0.20)
@@ -41,10 +41,35 @@ function TestNumericReduction()
     container:purge_change(DamageReduction, 0.20)
     Test.Compare(container[DamageReduction], 0.250, true)
 
+    -- test #9
     container:purge_change(DamageReduction, 0.25)
     Test.Compare(container[DamageReduction], 0.000, true)
+
+    -- test #10
+    container:apply_change(DamageReduction, -0.25)
+    Test.Compare(container[DamageReduction], -0.25, true)
+
+    -- test #11
+    container:apply_change(DamageReduction, -0.20)
+    Test.Compare(container[DamageReduction], -0.50, true)
+
+    -- test #12
+    container:apply_change(DamageReduction, 0.25)
+    Test.Compare(container[DamageReduction], -0.125, true)
+
+    -- test #13
+    container:apply_change(DamageReduction, 0.25)
+    Test.Compare(container[DamageReduction], 0.15625, true)
+
+    -- test #14
+    container:purge_change(DamageReduction, -0.25)
+    Test.Compare(container[DamageReduction], 0.325, true)
+
+    -- test #15
+    container:purge_change(DamageReduction, -0.20)
+    Test.Compare(container[DamageReduction], 0.4375, true)
 
     Test.Finish()
 end
 
-return TestNumericReduction
+return TestComplementComponent
