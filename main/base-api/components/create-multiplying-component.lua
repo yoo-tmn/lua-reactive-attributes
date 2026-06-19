@@ -39,9 +39,10 @@ end
 --- container:apply(damage_factor, -0.3)    -- apply x0.70    56%    (100 * 80% * 70%)
 --- ```
 --- @param evaluator Evaluator?
+--- @param adjusting boolean?
 --- @return MultiplyingComponent
-function CreateMultiplyingComponent(evaluator)
-    return CreateComponent(ApplyMultiplyingChange, PurgeMultiplyingChange, evaluator) --[[@as MultiplyingComponent]]
+function CreateMultiplyingComponent(evaluator, adjusting)
+    return CreateComponent(ApplyMultiplyingChange, PurgeMultiplyingChange, evaluator, adjusting or true) --[[@as MultiplyingComponent]]
 end
 
 return CreateMultiplyingComponent

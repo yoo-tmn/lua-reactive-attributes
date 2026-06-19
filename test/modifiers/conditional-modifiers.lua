@@ -9,9 +9,9 @@ local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(_, container
 end, true)
 Life:bind_evaluator(MoreThan400Life)
 
-ReactiveAttributes.CreateConditionalModifier(MoreThan400Life, {
+local ModifierEvaluator = ReactiveAttributes.CreateModifier({
     [Mana] = 100
-})
+}, nil, MoreThan400Life)
 
 local container = ReactiveAttributes.CreateContainer()
 
@@ -29,28 +29,34 @@ function TestConditionalModifier()
     -- test #3
     Test.Compare(container[Life], 300)
     -- test #4
-    Test.Compare(container[Mana], 200)
+    Test.Compare(container[MoreThan400Life], false)
 
     container:apply_change(Life, 100)
     -- test #5
     Test.Compare(container[Life], 400)
     -- test #6
-    Test.Compare(container[Mana], 200)
+    Test.Compare(container[MoreThan400Life], false)
 
     container:apply_change(Life, 20)
     -- test #7
-    Test.Compare(container[MoreThan400Life], true)
-    -- test #8
     Test.Compare(container[Life], 420)
+    -- test #8
+    Test.Compare(container[MoreThan400Life], true)
+
     -- test #9
+    container:apply_change(ModifierEvaluator.flag, 1)
     Test.Compare(container[Mana], 300)
 
-    container:purge_change(Life, 250)
     -- test #10
-    Test.Compare(container[MoreThan400Life], false)
+    container:purge_change(Life, 20)
+    Test.Compare(container[Mana], 200)
+
     -- test #11
-    Test.Compare(container[Life], 170)
+    container:apply_change(Life, 100)
+    Test.Compare(container[Mana], 300)
+
     -- test #12
+    container:purge_change(ModifierEvaluator.flag, 1)
     Test.Compare(container[Mana], 200)
 
     Test.Finish()

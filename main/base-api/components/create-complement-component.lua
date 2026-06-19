@@ -29,9 +29,10 @@ end
 --- container:apply(damage_reduction, -0.5) -- apply -50%   result: 58%
 --- ```
 --- @param evaluator Evaluator?
+--- @param adjusting boolean?
 --- @return ComplementComponent
-function CreateComplementComponent(evaluator)
-    return CreateComponent(ApplyComplementChange, PurgeComplementChange, evaluator) --[[@as ComplementComponent]]
+function CreateComplementComponent(evaluator, adjusting)
+    return CreateComponent(ApplyComplementChange, PurgeComplementChange, evaluator, adjusting or true) --[[@as ComplementComponent]]
 end
 
 return CreateComplementComponent

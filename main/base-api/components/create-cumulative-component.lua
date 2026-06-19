@@ -25,9 +25,10 @@ function PurgeCumulativeChange(_, prev, change) return (prev or 0) - change end
 --- container:purge(life_base_value, 100)    -- purge +100    150
 --- ```
 --- @param evaluator Evaluator?
+--- @param adjusting boolean?
 --- @return CumulativeComponent
-function CreateCumulativeComponent(evaluator)
-    return CreateComponent(ApplyCumulativeChange, PurgeCumulativeChange, evaluator) --[[@as CumulativeComponent]]
+function CreateCumulativeComponent(evaluator, adjusting)
+    return CreateComponent(ApplyCumulativeChange, PurgeCumulativeChange, evaluator, adjusting or true) --[[@as CumulativeComponent]]
 end
 
 return CreateCumulativeComponent

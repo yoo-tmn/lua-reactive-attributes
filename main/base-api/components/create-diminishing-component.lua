@@ -43,9 +43,10 @@ end
 --- Also works with negative numbers
 --- @param constant integer?
 --- @param evaluator Evaluator?
+--- @param adjusting boolean?
 --- @return DiminishingComponent
-function CreateDiminishingComponent(constant, evaluator)
-    local component = CreateComponent(ApplyDiminishingChange, PurgeDiminishingChange, evaluator) --[[@as DiminishingComponent]]
+function CreateDiminishingComponent(constant, evaluator, adjusting)
+    local component = CreateComponent(ApplyDiminishingChange, PurgeDiminishingChange, evaluator, adjusting or true) --[[@as DiminishingComponent]]
     component.constant = constant or 100
     return component
 end
