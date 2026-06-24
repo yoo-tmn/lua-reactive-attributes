@@ -2,6 +2,8 @@ local CreateAttribute = require('main.core-api.attribute-api.create-attribute')
 local CreateComponent = require('main.core-api.attribute-api.create-component')
 local CreateEvaluator = require('main.core-api.attribute-api.create-evaluator')
 local CreateContainer = require('main.core-api.container-api.create-container')
+local Evaluate = require('main.core-api.attribute-api.evaluate')
+local CreateCounter = require('main.util.counter.create-counter-component')
 local CreateModifier = require('main.base-api.modifiers.create-modifier')
 local BaseComponents = require('main.base-api.components.export')
 local BaseEvaluators = require('main.base-api.evaluators.export')
@@ -15,6 +17,10 @@ local ReactiveAttributes = {
     CreateComponent = CreateComponent,
     CreateEvaluator = CreateEvaluator,
     CreateContainer = CreateContainer,
+    Evaluate = Evaluate,
+
+    -- util
+    CreateCounter = CreateCounter,
 
     -- base-api components
     CreateCollectionComponent = BaseComponents.CreateCollectionComponent,

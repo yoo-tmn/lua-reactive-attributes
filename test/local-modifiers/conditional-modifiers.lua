@@ -3,6 +3,7 @@ local ReactiveAttributes = require('reactive-attributes')
 
 local Life = ReactiveAttributes.CreateCumulativeComponent()
 local Mana = ReactiveAttributes.CreateCumulativeComponent()
+local Level = CreateCounter()
 
 local MoreThan400Life = ReactiveAttributes.CreateEvaluator(function(_, container)
     return (container[Life] or 0) > 400
@@ -11,7 +12,7 @@ Life:bind_evaluator(MoreThan400Life)
 
 local ModifierEvaluator = ReactiveAttributes.CreateModifier({
     [Mana] = 100
-}, nil, MoreThan400Life)
+}, Level, nil, MoreThan400Life)
 
 local container = ReactiveAttributes.CreateContainer()
 
@@ -44,7 +45,7 @@ function TestConditionalModifier()
     Test.Compare(container[MoreThan400Life], true)
 
     -- test #9
-    container:apply_change(ModifierEvaluator.flag, 1)
+    container:apply_change(ModifierEvaluator.counter, 1)
     Test.Compare(container[Mana], 300)
 
     -- test #10
@@ -56,7 +57,7 @@ function TestConditionalModifier()
     Test.Compare(container[Mana], 300)
 
     -- test #12
-    container:purge_change(ModifierEvaluator.flag, 1)
+    container:purge_change(ModifierEvaluator.counter, 1)
     Test.Compare(container[Mana], 200)
 
     Test.Finish()

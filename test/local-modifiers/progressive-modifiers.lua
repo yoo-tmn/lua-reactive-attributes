@@ -4,11 +4,12 @@ local ReactiveAttributes = require('reactive-attributes')
 local PassiveSkillLevel = ReactiveAttributes.CreateCumulativeComponent()
 local Life = ReactiveAttributes.CreateCumulativeComponent()
 local Mana = ReactiveAttributes.CreateCumulativeComponent()
+local Level = CreateCounter()
 
 local ModifierEvaluator = ReactiveAttributes.CreateModifier({
     [Life] = 40,
     [Mana] = 20,
-}, PassiveSkillLevel)
+}, Level, PassiveSkillLevel)
 
 local EquipmentTag = ReactiveAttributes.CreateModifierTag()
 AttachModifierTag(ModifierEvaluator, EquipmentTag)
@@ -26,7 +27,7 @@ function TestProgressiveModifier()
     Test.Compare(container[Mana], 200)
 
     -- test #3
-    container:apply_change(ModifierEvaluator.flag, 1)
+    container:apply_change(ModifierEvaluator.counter, 1)
     container:apply_change(PassiveSkillLevel, 1)
     Test.Compare(container[Life], 340)
     -- test #4
@@ -57,7 +58,7 @@ function TestProgressiveModifier()
     Test.Compare(container[Mana], 250)
 
     -- test #13
-    container:apply_change(ModifierEvaluator.flag, 1)
+    container:apply_change(ModifierEvaluator.counter, 1)
     Test.Compare(container[Life], 500)
     -- test #14
     Test.Compare(container[Mana], 300)

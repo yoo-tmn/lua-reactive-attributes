@@ -5,11 +5,13 @@ local TestCollectionComponent = require('test.base-components.test-collection-co
 local TestComplementComponent = require('test.base-components.test-complement-component')
 local TestDiminishingComponent = require('test.base-components.test-diminishing-component')
 local TestMultiplyingComponent = require('test.base-components.test-multiplying-component')
+local TestEvaluateFn = require('test.base-evaluators.test-evaluate-fn')
 local TestParameter = require('test.base-evaluators.parameter-evaluator')
 local TestReduction = require('test.base-evaluators.reduction-evaluator')
 local TestLocalEvaluator = require('test.local-evaluator.local-evaluator')
-local TestConditionalModifier = require('test.modifiers.conditional-modifiers')
-local TestProgressiveModifier = require('test.modifiers.progressive-modifiers')
+local TestConditionalModifier = require('test.local-modifiers.conditional-modifiers')
+local TestProgressiveModifier = require('test.local-modifiers.progressive-modifiers')
+local TestEquipmentSet = require('test.modifier-rule.test-equipment-set')
 
 print("\nSTART UNIT TESTS\n")
 
@@ -18,6 +20,7 @@ TestCollectionComponent()
 TestComplementComponent()
 TestMultiplyingComponent()
 TestDiminishingComponent()
+TestEvaluateFn()
 
 print()
 
@@ -29,5 +32,6 @@ print()
 TestLocalEvaluator()
 TestConditionalModifier()
 TestProgressiveModifier()
+TestEquipmentSet()
 
 print()
